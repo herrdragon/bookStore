@@ -1,0 +1,232 @@
+<div class="col-xs-3 col-sm-3">
+    <div id="accordion" class="panel panel-primary behclick-panel">
+        <div class="panel-heading" style="background-color: #101010;">
+            <h3 class="panel-title">Search Filter</h3>
+        </div>
+        <div class="panel-body" >
+            <div class="panel-heading " >
+                <h4 class="panel-title">
+                    <a data-toggle="collapse" href="#collapse0">
+                        <i class="indicator fa fa-caret-down" aria-hidden="true"></i> Genre
+                      </br>
+                    </a>
+                    <spam><button type="button" ng-click="sortRating()" class="btn btn-default">Sort Rating</button> </spam>
+                    </a><spam><button type="button" ng-click="sortTitle()" class="btn btn-default">Sort Title</button></spam>
+                </h4>
+            </div>
+            <div id="collapse0" class="panel-collapse collapse in" >
+                <ul class="list-group">
+                    <li class="list-group-item">
+                        <div class="checkbox">
+                            <label>
+                                <input type="checkbox" ng-model="ts" ng-init="ts = false">
+                                Top Sellers
+                            </label>
+                        </div>
+                    </li>
+                    <li class="list-group-item">
+                        <div class="checkbox">
+                            <label>
+                                <input type="checkbox" ng-model="sf" ng-init="sf = false">
+                                Science Fiction
+                            </label>
+                        </div>
+                    </li>
+                    <li class="list-group-item">
+                        <div class="checkbox" >
+                            <label>
+                                <input type="checkbox" ng-model="sh" ng-init="sh = false">
+                                Self Help
+                            </label>
+                        </div>
+                    </li>
+                    <li class="list-group-item">
+                        <div class="checkbox"  >
+                            <label>
+                                <input type="checkbox" ng-model="adv" ng-init="adv = false">
+                                Adventure
+                            </label>
+                        </div>
+                    </li>
+					<li class="list-group-item">
+                        <div class="checkbox"  >
+                            <label>
+                                <input type="checkbox" ng-model="drm" ng-init="adv = false">
+                                Drama
+                            </label>
+                        </div>
+                    </li>
+                    <li class="list-group-item">
+                                  <div class="checkbox"  >
+                                      <label>
+                                          <input type="checkbox" ng-model="kid" ng-init="adv = false">
+                                          Kids
+                                      </label>
+                                  </div>
+                              </li>
+                              <li class="list-group-item">
+                                            <div class="checkbox"  >
+                                                <label>
+                                                    <input type="checkbox" ng-model="his" ng-init="adv = false">
+                                                    History
+                                                </label>
+                                            </div>
+                                        </li>
+                    <li class="list-group-item">
+                        <div class="checkbox"  >
+                            <label>
+                                <input type="checkbox" ng-model="all" ng-init="all = true">
+                                All
+                            </label>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="col-lg-9">
+    <div id="all">
+        <div ng-show="ts || all" >
+        <h1>Top Sellers</h1>
+        <div class="row">
+            <div ng-repeat="book in books | filter: {topSellers: '1'} | orderBy: sortParameter:functionToSort">
+                <div class="clearfix" ng-if="$index % 4 == 0"></div>
+                <div class="col-lg-3">
+                    <a ui-sref="bookDetails({ bookid: book.ID})" ui-sref-active="active" class="thumbnail"><img ng-src={{book.Cover}}.jpg alt="Book Cover"> <h5 class="text">{{book.Title}}</h5>
+                    </a>
+                    <jk-rating-stars rating="book.Rating" read-only="readOnly" ></jk-rating-stars>
+                    <div style="width: 100px; margin-bottom: 50px"> {{book.Rating}} Stars</div>
+                </div>
+             </div>
+        </div>
+        </div>
+
+    <div ng-show="sf || all">
+        <h1>Science Fiction</h1>
+        <div class="row">
+            <div ng-repeat="book in books | filter: {Genre: 'Science Fiction'} | orderBy: sortParameter:functionToSort">
+                <div class="clearfix" ng-if="$index % 4 == 0"></div>
+                <div class="col-lg-3">
+                    <a ui-sref="bookDetails({ bookid: book.ID})" ui-sref-active="active" class="thumbnail"><img ng-src={{book.Cover}}.jpg alt="Book Cover"><h5 class="text">{{book.Title}}</h5>
+                    </a>
+                    <jk-rating-stars rating="book.Rating" read-only="readOnly" ></jk-rating-stars>
+                    <div style="width: 100px; margin-bottom: 50px"> {{book.Rating}} Stars</div>
+                    <div ng-show=""></div>
+                </div>
+            </div>
+        </div>
+   </div>
+    <div class="toshow" ng-show="sh || all">
+        <h1>Self Help</h1>
+        <div class="row">
+            <div ng-repeat="book in books  | filter: {Genre: 'Self Help'} | orderBy: sortParameter:functionToSort">
+                <div class="clearfix" ng-if="$index % 4 == 0"></div>
+                <div class="col-lg-3">
+                    <a ui-sref="bookDetails({ bookid: book.ID})" ui-sref-active="active" class="thumbnail"><img ng-src={{book.Cover}}.jpg alt="Book Cover"><h5 class="text">{{book.Title}}</h5>
+                    </a>
+                    <jk-rating-stars rating="book.Rating" read-only="readOnly" ></jk-rating-stars>
+                    <div style="width: 100px; margin-bottom: 50px"> {{book.Rating}} Stars</div>
+                </div>
+            </div>
+        </div>
+   </div>
+    <div class="toshow" ng-show="adv || all">
+        <h1>Adventure</h1>
+        <div class="row">
+            <div ng-repeat="book in books  | filter: {Genre: 'Adventure'} | orderBy: sortParameter:functionToSort">
+                <div class="clearfix" ng-if="$index % 4 == 0"></div>
+                <div class="col-lg-3">
+                    <a ui-sref="bookDetails({ bookid: book.ID})" ui-sref-active="active" class="thumbnail"><img ng-src={{book.Cover}}.jpg alt="Book Cover"><h5 class="text">{{book.Title}}</h5>
+                    </a>
+                    <jk-rating-stars rating="book.Rating" read-only="readOnly" ></jk-rating-stars>
+                    <div style="width: 100px; margin-bottom: 50px"> {{book.Rating}} Stars</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div ng-show="drm || all">
+    <h1>Drama</h1>
+    <div class="row">
+        <div ng-repeat="book in books | filter: {Genre: 'Drama'} | orderBy: sortParameter:functionToSort">
+            <div class="clearfix" ng-if="$index % 4 == 0"></div>
+            <div class="col-lg-3">
+                <a ui-sref="bookDetails({ bookid: book.ID})" ui-sref-active="active" class="thumbnail"><img ng-src={{book.Cover}}.jpg alt="Book Cover"><h5 class="text">{{book.Title}}</h5>
+                </a>
+                <jk-rating-stars rating="book.Rating" read-only="readOnly" ></jk-rating-stars>
+                <div style="width: 100px; margin-bottom: 50px"> {{book.Rating}} Stars</div>
+                <div ng-show=""></div>
+            </div>
+        </div>
+    </div>
+</div>
+<div ng-show="kid || all">
+    <h1>Kids</h1>
+    <div class="row">
+        <div ng-repeat="book in books | filter: {Genre: 'Kids'} | orderBy: sortParameter:functionToSort">
+            <div class="clearfix" ng-if="$index % 4 == 0"></div>
+            <div class="col-lg-3">
+                <a ui-sref="bookDetails({ bookid: book.ID})" ui-sref-active="active" class="thumbnail"><img ng-src={{book.Cover}}.jpg alt="Book Cover"><h5 class="text">{{book.Title}}</h5>
+                </a>
+                <jk-rating-stars rating="book.Rating" read-only="readOnly" ></jk-rating-stars>
+                <div style="width: 100px; margin-bottom: 50px"> {{book.Rating}} Stars</div>
+                <div ng-show=""></div>
+            </div>
+        </div>
+    </div>
+</div>
+<div ng-show="his || all">
+    <h1>History</h1>
+    <div class="row">
+        <div ng-repeat="book in books | filter: {Genre: 'History'} | orderBy: sortParameter:functionToSort">
+            <div class="clearfix" ng-if="$index % 4 == 0"></div>
+            <div class="col-lg-3">
+                <a ui-sref="bookDetails({ bookid: book.ID})" ui-sref-active="active" class="thumbnail"><img ng-src={{book.Cover}}.jpg alt="Book Cover"><h5 class="text">{{book.Title}}</h5>
+                </a>
+                <jk-rating-stars rating="book.Rating" read-only="readOnly" ></jk-rating-stars>
+                <div style="width: 100px; margin-bottom: 50px"> {{book.Rating}} Stars</div>
+                <div ng-show=""></div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    $(function(){
+        // var ts = localStorage.ts === 'true'? true: false;
+        // $('#ts').prop('checked', ts || false);
+        var sf = localStorage.sf === 'true'? true: false;
+        $('#sf').prop('checked', sf || false);
+        var sh = localStorage.sh === 'true'? true: false;
+        $('#sh').prop('checked', sh || false);
+        var adv = localStorage.adv === 'true'? true: false;
+        $('#adv').prop('checked', adv || false);
+        var all = localStorage.all === 'true'? true: false;
+        $('#all').prop('checked', all || false);
+    });
+    $('#ts').on('change', function() {
+        localStorage.ts = $(this).is(':checked');
+    });
+    $('#sf').on('change', function() {
+        localStorage.sf = $(this).is(':checked');
+    });
+    $('#sh').on('change', function() {
+        localStorage.sh = $(this).is(':checked');
+    });
+    $('#adv').on('change', function() {
+        localStorage.adv = $(this).is(':checked');
+    });
+    $('#kid').on('change', function() {
+        localStorage.all = $(this).is(':checked');
+    });
+    $('#his').on('change', function() {
+        localStorage.all = $(this).is(':checked');
+    });
+    $('#drm').on('change', function() {
+        localStorage.all = $(this).is(':checked');
+    });
+    $('#all').on('change', function() {
+        localStorage.all = $(this).is(':checked');
+    });
+
+</script>

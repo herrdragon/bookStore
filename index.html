@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="alphauno">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- CDN Scripts Bootstrap-->
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <!-- CDN Scripts Angular 1.6-->
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
+    <script src="//unpkg.com/angular-ui-router/release/angular-ui-router.min.js"></script>
+    <script src="https://code.angularjs.org/1.6.4/angular-animate.min.js"></script>
+    <script src="https://code.angularjs.org/1.6.4/angular-aria.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angular_material/1.0.5/angular-material.min.js"></script>
+    <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/angular_material/1.0.5/angular-material.min.css" />
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+    <!-- Local Files -->
+    <link rel="stylesheet" href="jk-rating-stars.min.css">
+    <link rel="stylesheet" href="style.css">
+    <script src="jk-rating-stars.min.js"></script>
+    <script src="SimpleCart.min.js"></script>
+    <script src="app.js"></script>
+	<script src="SimpleCart.js"></script>
+  <script>
+         simpleCart({
+             checkout: {
+                 type: "PayPal" ,
+                 email: "alphauno@bookstoreuno.com"
+             },
+         });
+     </script>
+    <title>AlphaUno</title>
+</head>
+<body ng-cloak ng-controller="MainCtrl">
+
+<nav class="navbar navbar-default navbar-inverse" role="navigation" style="z-index: 999">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" ui-sref="home">Bookstore Uno</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav">
+                <li><a ui-sref="home" ui-sref-active="active">Home</a></li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+				<li class="dropdown">
+					<a ui-sref="#" class="dropdown-toggle" data-toggle="dropdown"><b>View Cart</b> <span class="caret"></span></a>
+						<ul class="dropdown-menu">
+							<li>
+								<div class="row">
+									 <div class="col-md-12">
+										<form class="form" role="form" accept-charset="UTF-8" style="padding-left: 5px; padding-right: 5px">
+											<div class="form-group">
+											<p>Your Current Shopping Cart Items: </p></div>
+											<div class="form-group">
+											<div class="simpleCart_items">
+											</div>
+											</div>
+											<div class="form-group"><div class="simpleCart_items"><button ng-click="simpleCart_items">Save for Later</button></div></div>
+                                            <button ng-click="goShop()" class="btn btn-info">Checkout</button>
+                    </form>
+									</div>
+								</div>
+							</li>
+						</ul>
+				</li>
+
+                <li ng-hide="authorization" class="dropdown">
+                    <a ui-sref="#" class="dropdown-toggle" data-toggle="dropdown"><b>Login</b> <span class="caret"></span></a>
+                    <ul id="login-dp" class="dropdown-menu">
+                        <li>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <form class="form" role="form" accept-charset="UTF-8">
+                                        <div class="form-group">
+                                            <label class="sr-only" for="Username">Username</label>
+                                            <input type="text" ng-model="username" class="form-control" placeholder="Username" required autofocus>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="sr-only" for="Password">Password</label>
+                                            <input type="password" name="pass" ng-model="password" class="form-control" placeholder="Password" required>
+                                            <!-- <div class="help-block text-right"><a href="">Forgot password?</a></div> -->
+                                        </div>
+                                        <div class="form-group">
+                                            <button ng-click="login()" ng-disabled="userForm.$invalid" class="btn btn-primary btn-block">Sign in</button>
+                                        </div>
+                                    </form>
+                                </div>
+                                <div class="bottom text-center">
+                                    Get a Free Account - <a ui-sref="register"><b> Register</b></a>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </li>
+                <div class="modal fade" id="mMessg">
+                  <div class="modal-dialog">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                        <h4 class="modal-title" id="mMessgTitle">title</h4>
+                      </div>
+                      <div class="modal-body">
+                        <p id="mMessgText">text</p>
+                      </div>
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                      </div>
+                    </div><!-- /.modal-content -->
+                  </div><!-- /.modal-dialog -->
+                </div><!-- /.modal -->
+                <li ng-show="authorization" class="dropdown" id="myid">
+                    <a ui-sref="#" class="dropdown-toggle logged" data-toggle="dropdown" style="padding-top:7px;"><button class="btn"><b>{{currentuser[0].username}}</b></button><span class="caret"></span></a>
+                    <ul id="login-dp" class="dropdown-menu">
+                        <li>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <form class="form" role="form" accept-charset="UTF-8">
+                                        <div class="form-group">
+                                        <a ui-sref="profile"><button class="btn btn-primary btn-block"><span class="glyphicon glyphicon-user"></span> My Account</button></a>
+                                        </div>
+                                        <!-- <div class="form-group">
+                                            <div class="simpleCart_items">
+                                            <button ng-click="simpleCart_items" class="btn btn-primary btn-block simpleCart_checkout"><span class="glyphicon glyphicon-shopping-cart"></span> Shopping Cart</button>
+                                            </div>
+                                        </div> -->
+                                        <div class="form-group">
+                                            <button ng-click="logout()" class="btn btn-primary btn-block"><span class="glyphicon glyphicon-remove-circle"></span> Logout</button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </div><!-- /.navbar-collapse -->
+    </div><!-- /.container-fluid -->
+</nav>
+</div>
+<div class="container">
+    <!-- Load views -->
+    <div ui-view></div>
+</div>
+<div class="container">
+    <div class="container navbar navbar-default navbar-fixed-bottom" style="background-color: #101010; z-index: 2;">
+        <div class="container-fluid">
+            <p class="navbar-text pull-left text-muted">Bookstore Uno © - 2017 All rights reserved.</p>
+        </div>
+    </div>
+</div>
+<script>
+    $(document).ready(function(){
+        window.location.replace("/#!/home");
+    })
+    $(document).on('click','.dropdown-toggle',function(e) {
+        e.preventDefault();
+        $("a").click(function(){
+            if ($("#myid").hasClass("open")) {
+                $("#myid").removeClass("open");
+            }
+        });
+    });
+</script>
+</body>
+</html>

@@ -1,0 +1,60 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-12">
+            <h1 class="title">{{book.Title}}</h1>
+        </div>
+    </div>
+    <div class="row">            <div class="simpleCart_shelfItem LaterCart_shelfItem">
+      <div class="simpleCart_shelfItem">
+        <div class="col-md-3">
+            <img ng-src={{book.Cover}}.jpg class="item_image item_thumb">
+        </div>
+        <div class="col-md-9">
+            <b>Description:</br></b>
+            <p class="text-info">{{book.Details}}</p>
+            <b>Genre:<b>
+            </br>
+            <p class="text-info">{{book.Genre}}</p>
+            <b>ISBN:<b>
+            </br>
+            <p class="text-info">{{book.ISBN}}</p>
+
+                <b>Price:<b>
+                </br>
+                <p class="item_price text-info">{{book.Price | currency:"$":2}}</p>
+                <h4 class="item_name" style="display:none">{{book.Title}}</h4>
+                <input type="text" value="1" maxlength="2" size="2" class="item_Quantity">
+                <button ng-if="currentuser[0]" ng-click="display()" type="button" class="item_add btn btn-info">Add to Cart </button> <spam ng-show="alertDisplayed"><button type="button" class="btn btn-success">Item Added!</button></spam>
+                <button ng-if="!currentuser[0]" type="button" class="btn btn-info" data-toggle="modal" data-target="#myModal">Add to Cart</button>
+				        <button ng-else="!currentuser[0]" type="button" class="btn btn-info" data-toggle="modal" data-target="#myModal">Save for Later</button>
+                <spam><jk-rating-stars rating="book.Rating" read-only="true" ></jk-rating-stars></spam>
+                <spam><div style="width: 100px; margin-bottom: 50px"> {{book.Rating}} Stars</div></spam>
+                <!-- Modal -->
+                <div class="modal fade" id="myModal" role="dialog">
+                  <div class="modal-dialog">
+
+                    <!-- Modal content-->
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title">Almost there!</h4>
+                      </div>
+                      <div class="modal-body">
+                        <p>Please login or register to purchase this book.</p>
+                      </div>
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                      </div>
+                    </div>
+
+                  </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <a class="title text" ui-sref="home" >Go back</a>
+        </div>
+    </div>
+</div>

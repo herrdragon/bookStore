@@ -1,0 +1,30 @@
+<!--my profile title-->
+<div class="row title-box">
+    <div class="col-md-2"></div>
+    <div class="col-md-8 title">
+    <div class="profile-title">
+        <h1>{{currentuser[0].username}}'s profile</h1>
+    </div></div>
+    <div class="col-md-2"></div>
+</div>
+<br>
+<!--buttons-->
+<div class="row title-box bp">
+    <div class="col-md-4" class="profile-btn-div">
+        <a ui-sref="personal"><button type="button" class="btn btn-primary btn-lg btn-block tall">Personal Info</button></a>
+    </div>
+
+    <div class="col-md-4" class="profile-btn-div">
+        <a ui-sref="shipping"><button type="button" class="btn btn-primary btn-lg btn-block tall" >Shipping Information</button></a>
+    </div>
+
+    <div class="col-md-4" class="profile-btn-div">
+        <a ui-sref="cc"><button type="button" class="btn btn-primary btn-lg btn-block tall">Credit Cards</button></a>
+    </div>
+</div>
+<hr>
+<div class="row">
+    <div class="col-lg-10">
+        <div ui-view=""></div>
+    </div>
+</div>
