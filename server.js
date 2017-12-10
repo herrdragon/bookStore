@@ -1,7 +1,5 @@
 
-// const WWW_ROOT = '/var/www/html';
-const WWW_ROOT = '/Users/miguelherrnsdorf/webserver/alphauno/bookStoreUno';
-
+const WWW_ROOT = '/var/www/html';
 const http = require('http');
 const bcrypt = require('bcrypt');
 const crypto = require('crypto');
@@ -11,9 +9,9 @@ const fs = require('fs');
 var mysql = require('mysql');
 var connection = mysql.createConnection({
     // host     : '127.0.0.1',
-    user     : 'root',
-    password : 'futglobal',
-    socketPath: '/Applications/MAMP/tmp/mysql/mysql.sock',
+    user     : '',
+    password : '',
+    socketPath: '/mysql/mysql.sock',
     database : 'bookstoreuno'
 });
 connection.connect(function(err){
@@ -29,7 +27,6 @@ const HTTP_SERVER_PORT = process.argv[2];
 
 //BEGIN General Exceptions, TODO Improve this
 process.on('uncaughtException', (err) => {
-    //fs.appendFile('exception.log', `uncaughtException: ${err}`, (err) => {
     let data = (new Date()).toJSON() + ': ' + err + "\n";
     fs.appendFile('exception-'+HTTP_SERVER_PORT+'.log', data, (err) => {
         if (err) console.error('Error log:', err.message);
@@ -39,7 +36,6 @@ process.on('uncaughtException', (err) => {
 //END General Exceptions
 
 const httpServer = http.createServer((req, res) => {
-
     //BEGIN General Errors
     req.on('error', (err) => {
         console.error(err);
@@ -456,7 +452,6 @@ const httpServer = http.createServer((req, res) => {
                 // var decipher = crypto.createDecipher('aes192', 'a password');
                 // let decrypted = decipher.update(encrypted, 'hex', 'utf8');
                 // decrypted += decipher.final('utf8');
-
                 res.write(JSON.stringify({cc:info}));
                 res.end();
             });
